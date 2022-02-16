@@ -5,5 +5,5 @@
         android:title="Stopwatch" />
     <item
         android:id="@+id/bestRecords"
-        android:title="Best Records" />
+        android:title="All Records" />
 </menu>

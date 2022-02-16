@@ -74,37 +74,52 @@ class MainActivity : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences("com.example.stopwatch", MODE_PRIVATE)
         sharedPreferences.edit().putString("time", ObjectSerializer.serialize(timeList)).apply()
-        //Loop to find the min
-        var min = timeList[0]
-        for (i in 1 until timeList.size) {
-            if (timeList[i]!! < min!!) {
-                min = timeList.get(i)
-            }
-        }
-        timeList.add(time)
-        if (time < min!!){
-            //Congratulations
+
+        if (timeList.isEmpty()){
+            timeList.add(time)
+            //First Time
             AlertDialog.Builder(this)
-                .setTitle("🎉 Congratulations!")
-                .setMessage("You just beat your highest mile record. Go, you!")
-                .setNegativeButton("Great!", null)
-                .setPositiveButton("Check Records",DialogInterface.OnClickListener(){
+                .setTitle("👋 Welcome!")
+                .setMessage("You just completed your first mile! We're so happy for you!")
+                .setNegativeButton("Thanks!", null)
+                .setPositiveButton("All Records",DialogInterface.OnClickListener(){
                         dialogInterface: DialogInterface?, j: Int ->
                     val intent = Intent(this, BestRecords::class.java)
                     startActivity(intent)
                 })
                 .show()
         } else {
-            AlertDialog.Builder(this)
-                .setTitle("😇 You finished!")
-                .setMessage("Maybe you didn’t beat the highest record this time, but hey, you finished! Great effort!")
-                .setNegativeButton("Okay", null)
-                .setPositiveButton("Check Records",DialogInterface.OnClickListener(){
-                        dialogInterface: DialogInterface?, j: Int ->
-                    val intent = Intent(this, BestRecords::class.java)
-                    startActivity(intent)
-                })
-                .show()
+            var min = timeList[0]
+            for (i in 1 until timeList.size) {
+                if (timeList[i]!! < min!!) {
+                    min = timeList.get(i)
+                }
+            }
+            timeList.add(time)
+            if (time < min!!){
+                //Congratulations
+                AlertDialog.Builder(this)
+                    .setTitle("🎉 Congratulations!")
+                    .setMessage("You just beat your highest mile record. Go, you!")
+                    .setNegativeButton("Great!", null)
+                    .setPositiveButton("All Records",DialogInterface.OnClickListener(){
+                            dialogInterface: DialogInterface?, j: Int ->
+                        val intent = Intent(this, BestRecords::class.java)
+                        startActivity(intent)
+                    })
+                    .show()
+            } else {
+                AlertDialog.Builder(this)
+                    .setTitle("😇 You finished!")
+                    .setMessage("Maybe you didn’t beat the highest record this time, but hey, you finished! Great effort!")
+                    .setNegativeButton("Okay", null)
+                    .setPositiveButton("All Records",DialogInterface.OnClickListener(){
+                            dialogInterface: DialogInterface?, j: Int ->
+                        val intent = Intent(this, BestRecords::class.java)
+                        startActivity(intent)
+                    })
+                    .show()
+            }
         }
     }
 
