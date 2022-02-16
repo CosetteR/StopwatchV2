@@ -1,16 +1,15 @@
 package com.example.stopwatch
 
-import android.content.Intent
+import android.app.AlertDialog
+import android.content.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.IntentFilter
 import android.text.format.Time
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -69,6 +68,32 @@ class MainActivity : AppCompatActivity() {
 
     fun save(view: View) {
         timeList.add(time)
+        //NEED TO GET INFORMATION FROM DATABASE TO SEE IF IT BEATS BEST RECORD
+
+        //Congratulations
+        AlertDialog.Builder(this)
+            .setTitle("🎉 Congratulations!")
+            .setMessage("You just beat your highest mile record. Go, you!")
+            .setNegativeButton("Great!", null)
+            .setPositiveButton("Check Records",DialogInterface.OnClickListener(){
+                    dialogInterface: DialogInterface?, j: Int ->
+                val intent = Intent(this, BestRecords::class.java)
+                startActivity(intent)
+            })
+            .show()
+
+        //Try next
+//        AlertDialog.Builder(this)
+//            .setTitle("😇 You finished!")
+//            .setMessage("Maybe you didn’t beat the highest record this time, but hey, you finished! Great effort!")
+//            .setNegativeButton("Okay", null)
+//            .setPositiveButton("Check Records",DialogInterface.OnClickListener(){
+//                    dialogInterface: DialogInterface?, j: Int ->
+//                val intent = Intent(this, BestRecords::class.java)
+//                startActivity(intent)
+//            })
+//            .show()
+
     }
 
     private fun resetTimer() {
