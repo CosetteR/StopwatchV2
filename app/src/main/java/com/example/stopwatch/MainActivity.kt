@@ -17,7 +17,7 @@ import com.example.stopwatch.databinding.ActivityMainBinding
 import kotlin.math.roundToInt
 
 
-var timeList = ArrayList<Double>()
+var timeList = ArrayList<Double?>()
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,6 +34,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
+
+        val sharedPreferences = getSharedPreferences("com.example.stopwatch", MODE_PRIVATE)
+        timeList = ObjectSerializer.deserialize(sharedPreferences
+            .getString("time", ObjectSerializer.serialize(ArrayList<String>()))) as ArrayList<Double?>
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -68,6 +72,8 @@ class MainActivity : AppCompatActivity() {
 
     fun save(view: View) {
         timeList.add(time)
+        val sharedPreferences = getSharedPreferences("com.example.stopwatch", MODE_PRIVATE)
+        sharedPreferences.edit().putString("time", ObjectSerializer.serialize(timeList)).apply()
         //NEED TO GET INFORMATION FROM DATABASE TO SEE IF IT BEATS BEST RECORD
 
         //Congratulations
