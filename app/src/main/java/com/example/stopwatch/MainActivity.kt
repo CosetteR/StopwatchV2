@@ -74,32 +74,38 @@ class MainActivity : AppCompatActivity() {
         timeList.add(time)
         val sharedPreferences = getSharedPreferences("com.example.stopwatch", MODE_PRIVATE)
         sharedPreferences.edit().putString("time", ObjectSerializer.serialize(timeList)).apply()
-        //NEED TO GET INFORMATION FROM DATABASE TO SEE IF IT BEATS BEST RECORD
+        //Loop to find the min
+        var min = timeList[0]
+        for (i in 1 until timeList.size) {
+            if (timeList[i]!! < min!!) {
+                min = timeList.get(i)
+            }
+        }
 
-        //Congratulations
-        AlertDialog.Builder(this)
-            .setTitle("🎉 Congratulations!")
-            .setMessage("You just beat your highest mile record. Go, you!")
-            .setNegativeButton("Great!", null)
-            .setPositiveButton("Check Records",DialogInterface.OnClickListener(){
-                    dialogInterface: DialogInterface?, j: Int ->
-                val intent = Intent(this, BestRecords::class.java)
-                startActivity(intent)
-            })
-            .show()
-
-        //Try next
-//        AlertDialog.Builder(this)
-//            .setTitle("😇 You finished!")
-//            .setMessage("Maybe you didn’t beat the highest record this time, but hey, you finished! Great effort!")
-//            .setNegativeButton("Okay", null)
-//            .setPositiveButton("Check Records",DialogInterface.OnClickListener(){
-//                    dialogInterface: DialogInterface?, j: Int ->
-//                val intent = Intent(this, BestRecords::class.java)
-//                startActivity(intent)
-//            })
-//            .show()
-
+        if (time < min!!){
+            //Congratulations
+            AlertDialog.Builder(this)
+                .setTitle("🎉 Congratulations!")
+                .setMessage("You just beat your highest mile record. Go, you!")
+                .setNegativeButton("Great!", null)
+                .setPositiveButton("Check Records",DialogInterface.OnClickListener(){
+                        dialogInterface: DialogInterface?, j: Int ->
+                    val intent = Intent(this, BestRecords::class.java)
+                    startActivity(intent)
+                })
+                .show()
+        } else {
+            AlertDialog.Builder(this)
+                .setTitle("😇 You finished!")
+                .setMessage("Maybe you didn’t beat the highest record this time, but hey, you finished! Great effort!")
+                .setNegativeButton("Okay", null)
+                .setPositiveButton("Check Records",DialogInterface.OnClickListener(){
+                        dialogInterface: DialogInterface?, j: Int ->
+                    val intent = Intent(this, BestRecords::class.java)
+                    startActivity(intent)
+                })
+                .show()
+        }
     }
 
     private fun resetTimer() {
