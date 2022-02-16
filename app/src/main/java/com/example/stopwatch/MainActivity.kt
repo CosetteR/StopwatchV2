@@ -58,7 +58,6 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }//onCreateOptionsMenu
 
-    //https://stackoverflow.com/questions/53582783/go-to-another-activity-on-menu-item-selection-in-kotlin
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.bestRecords -> {
@@ -93,7 +92,7 @@ class MainActivity : AppCompatActivity() {
                     min = timeList.get(i)
                 }
             }
-            timeList.add(time)
+            timeList.add(0, time)
             sharedPreferences.edit().putString("time", ObjectSerializer.serialize(timeList)).apply()
             //Toast.makeText(applicationContext, time.toString(), Toast.LENGTH_LONG).show()
             if (time < min!!){
@@ -121,43 +120,40 @@ class MainActivity : AppCompatActivity() {
                     .show()
             }
         }
-
-
-
-    }
+    }//save
 
     private fun resetTimer() {
         stopTimer()
         time = 0.0
         binding.timeView.text = getTimeStringFromDouble(time)
-    }
+    }//resetTimer
 
     private fun startStopTimer() {
         if (timerStarted)
             stopTimer()
         else
             startTimer()
-    }
+    }//startStopTimer
 
     private fun startTimer() {
         serviceIntent.putExtra(TimerService.TIME_EXTRA, time)
         startService(serviceIntent)
         binding.start.text = "Stop"
         timerStarted = true
-    }
+    }//startTime
 
     private fun stopTimer() {
         stopService(serviceIntent)
         binding.start.text = "Start"
         timerStarted = false
-    }
+    }//stopTimer
 
     private val updateTime: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             time = intent.getDoubleExtra(TimerService.TIME_EXTRA, 0.0)
             binding.timeView.text = getTimeStringFromDouble(time)
-        }
-    }
+        }//onReceive
+    }//updateTime
 
     private fun getTimeStringFromDouble(time: Double): String {
         val resultInt = time.roundToInt()
@@ -166,7 +162,7 @@ class MainActivity : AppCompatActivity() {
         val seconds = resultInt % 86400 % 3600 % 60
 
         return makeTimeString(hours, minutes, seconds)
-    }
+    }//getTimeStringFromDouble
 
     private fun makeTimeString(hour: Int, min: Int, sec: Int): String =
         String.format("%02d:%02d:%02d", hour, min, sec)

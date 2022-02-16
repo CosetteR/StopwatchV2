@@ -16,13 +16,13 @@ class TimerService : Service()
         val time = intent.getDoubleExtra(TIME_EXTRA, 0.0)
         timer.scheduleAtFixedRate(TimeTask(time), 0, 1000)
         return START_NOT_STICKY
-    }
+    }//onStartCommand
 
     override fun onDestroy()
     {
         timer.cancel()
         super.onDestroy()
-    }
+    }//onDestroy
 
     private inner class TimeTask(private var time: Double) : TimerTask()
     {
@@ -32,8 +32,8 @@ class TimerService : Service()
             time++
             intent.putExtra(TIME_EXTRA, time)
             sendBroadcast(intent)
-        }
-    }
+        }//run
+    }//TimeTask
 
     companion object
     {

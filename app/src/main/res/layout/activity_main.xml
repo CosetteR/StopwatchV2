@@ -61,7 +61,7 @@
             android:layout_marginTop="20dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:text="Confident of your record? Click save to check if it beats your best record!"
+            android:text="Confident of your mile record? Click save to check if it beats your best record!"
             android:textAlignment="center"
             android:textColor="#2C2C2C"
             android:textStyle="italic" />
