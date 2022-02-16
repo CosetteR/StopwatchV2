@@ -23,8 +23,9 @@ class MainActivity : AppCompatActivity() {
     private var timerStarted = false
     private lateinit var serviceIntent: Intent
     private var time = 0.0
-
-    lateinit var save: Button
+    lateinit var start : Button
+    lateinit var save : Button
+    lateinit var reset : Button
     lateinit var timeView: TextView
 
 
@@ -35,14 +36,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.startStop.setOnClickListener { startStopTimer() }
+        binding.start.setOnClickListener { startStopTimer() }
         binding.reset.setOnClickListener { resetTimer() }
 
-
-        //startStop = findViewById(R.id.startStop)
         save = findViewById(R.id.save)
-        //reset = findViewById(R.id.reset)
-        //timeView = findViewById(R.id.timeView)
+        timeView = findViewById(R.id.timeView)
 
         serviceIntent = Intent(applicationContext, TimerService::class.java)
         registerReceiver(updateTime, IntentFilter(TimerService.TIMER_UPDATED))
@@ -68,13 +66,13 @@ class MainActivity : AppCompatActivity() {
     private fun startTimer() {
         serviceIntent.putExtra(TimerService.TIME_EXTRA, time)
         startService(serviceIntent)
-        binding.startStop.text = "Stop"
+        binding.start.text = "Stop"
         timerStarted = true
     }
 
     private fun stopTimer() {
         stopService(serviceIntent)
-        binding.startStop.text = "Start"
+        binding.start.text = "Start"
         timerStarted = false
     }
 

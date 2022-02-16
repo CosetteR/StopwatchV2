@@ -23,12 +23,11 @@
             android:textSize="56sp" />
 
         <Button
-            android:id="@+id/startStop"
+            android:id="@+id/start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="32dp"
-            android:onClick="startStopTimer"
             android:text="Start" />
 
         <Button
@@ -37,7 +36,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:onClick="save"
             android:text="Save" />
 
         <Button
@@ -46,7 +44,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:onClick="resetTimer"
             android:text="Reset" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
