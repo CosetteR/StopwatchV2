@@ -71,12 +71,10 @@ class MainActivity : AppCompatActivity() {
     }//onOptionsItemSelected
 
     fun save(view: View) {
-
         val sharedPreferences = getSharedPreferences("com.example.stopwatch", MODE_PRIVATE)
-        sharedPreferences.edit().putString("time", ObjectSerializer.serialize(timeList)).apply()
-
         if (timeList.isEmpty()){
             timeList.add(time)
+            sharedPreferences.edit().putString("time", ObjectSerializer.serialize(timeList)).apply()
             //First Time
             AlertDialog.Builder(this)
                 .setTitle("👋 Welcome!")
@@ -96,6 +94,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             timeList.add(time)
+            sharedPreferences.edit().putString("time", ObjectSerializer.serialize(timeList)).apply()
+            //Toast.makeText(applicationContext, time.toString(), Toast.LENGTH_LONG).show()
             if (time < min!!){
                 //Congratulations
                 AlertDialog.Builder(this)
@@ -121,6 +121,9 @@ class MainActivity : AppCompatActivity() {
                     .show()
             }
         }
+
+
+
     }
 
     private fun resetTimer() {

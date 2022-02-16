@@ -27,7 +27,6 @@ class BestRecords : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }//onCreateOptionsMenu
 
-    //https://stackoverflow.com/questions/53582783/go-to-another-activity-on-menu-item-selection-in-kotlin
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.stopwatch -> {
