@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
     }//onOptionsItemSelected
 
     fun save(view: View) {
-        timeList.add(time)
+
         val sharedPreferences = getSharedPreferences("com.example.stopwatch", MODE_PRIVATE)
         sharedPreferences.edit().putString("time", ObjectSerializer.serialize(timeList)).apply()
         //Loop to find the min
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                 min = timeList.get(i)
             }
         }
-
+        timeList.add(time)
         if (time < min!!){
             //Congratulations
             AlertDialog.Builder(this)
