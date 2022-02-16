@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
 
@@ -15,6 +16,9 @@ class BestRecords : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_best_records)
         records = findViewById(R.id.records)
+
+        val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, timeList)
+        records.adapter = arrayAdapter
     }//onCreate
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

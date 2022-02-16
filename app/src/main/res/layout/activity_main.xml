@@ -72,6 +72,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:backgroundTint="#2C2C2C"
-            android:text="Save" />
+            android:text="Save"
+            android:onClick = "save"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
