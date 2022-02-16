@@ -37,7 +37,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="Reset" />
+            android:backgroundTint="#FFFFFF"
+            android:text="Reset"
+            android:textColor="#6F00F8" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
