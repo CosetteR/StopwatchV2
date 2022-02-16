@@ -15,7 +15,7 @@ import com.example.stopwatch.databinding.ActivityMainBinding
 import kotlin.math.roundToInt
 
 
-
+var timeList = ArrayList<Double>()
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     }//onCreate
 
     fun save(view: View) {
-        Toast.makeText(applicationContext, time.toString(), Toast.LENGTH_SHORT).show()
+        timeList.add(time)
     }
 
     private fun resetTimer() {
